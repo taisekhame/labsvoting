@@ -48,7 +48,7 @@ const NomineeCard = ({ nominee, onVoteClick }: NomineeProps) => {
           <p className="text-white/90 text-sm mb-6">{nominee.description}</p>
           
           <div className="flex-grow">
-            <h4 className="text-white font-semibold mb-3">Achievements:</h4>
+            {/* <h4 className="text-white font-semibold mb-3">Achievements:</h4> */}
             <ul className="space-y-2">
               {nominee.achievements.map((achievement, index) => (
                 <li key={index} className="text-white/90 text-sm flex items-center">
