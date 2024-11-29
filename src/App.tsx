@@ -4,7 +4,6 @@ import Footer from './components/Footer';
 import LandingPage from './pages/LandingPage';
 import CategoryPage from './pages/CategoryPage';
 import SuccessPage from './pages/SuccessPage';
-import Payment from './pages/Payment';
 
 const App = () => {
   return (
@@ -15,7 +14,6 @@ const App = () => {
           <Route path="" element={<LandingPage />} />
           <Route path="/category/:id" element={<CategoryPage />} />
           <Route path="/success" element={<SuccessPage />} />
-          <Route path="/payment" element={<Payment />} />
         </Routes>
         <Footer />
       </div>
