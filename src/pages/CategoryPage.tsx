@@ -1,30 +1,29 @@
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
+import { doc, getDoc } from 'firebase/firestore'; // Ensure Firestore imports
+import { db } from '../../firebase'; // Adjust path to Firebase config
 import NomineeCard from '../components/NomineeCard';
 import VoteModal from '../components/VoteModal';
-
 
 const CategoryPage = () => {
   const { id } = useParams();
   const [selectedNominee, setSelectedNominee] = useState(null);
-  // const categoryNominees = nominees[id as keyof typeof nominees] || [];
   const [categoryNominees, setCategoryNominees] = useState([]);
-  
+
   useEffect(() => {
-    // Fetch nominees for the specific category from Firestore
     const fetchNominees = async () => {
       try {
-        const categoryRef = doc(db, 'categories', id); // Get the category document by ID
+        const categoryRef = doc(db, 'categories', id);
         const categorySnapshot = await getDoc(categoryRef);
-        
+
         if (categorySnapshot.exists()) {
-          const nomineesData = categorySnapshot.data().nominees;
+          const nomineesData = categorySnapshot.data().nominees || [];
           setCategoryNominees(nomineesData);
         } else {
-          console.log("Category not found");
+          console.error('Category not found');
         }
       } catch (error) {
-        console.error("Error fetching nominees: ", error);
+        console.error('Error fetching nominees: ', error);
       }
     };
 

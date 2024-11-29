@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { doc, getDocs, collection } from 'firebase/firestore';
-import { db } from '../../firebase'; // Adjust your Firebase import path
+import { collection, getDocs } from 'firebase/firestore';
+import { db } from '../../firebase'; // Ensure this path is correct
 import { motion } from 'framer-motion';
 import { ChevronDown } from 'lucide-react';
 import CategoryCard from '../components/CategoryCard';
@@ -11,15 +11,15 @@ const LandingPage = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    // Fetch categories from Firestore
     const fetchCategories = async () => {
       try {
         const categoriesRef = collection(db, 'categories');
         const categoriesSnapshot = await getDocs(categoriesRef);
         const categoriesList = categoriesSnapshot.docs.map((doc) => ({
-          id: doc.id, // Firestore document ID
-          ...doc.data(), // Category data
+          id: doc.id,
+          ...doc.data(),
         }));
+        console.log(categoriesList);
         setCategories(categoriesList);
       } catch (error) {
         console.error('Error fetching categories:', error);
@@ -28,7 +28,6 @@ const LandingPage = () => {
 
     fetchCategories();
   }, []);
-
   const scrollToCategories = () => {
     document.getElementById('categories')?.scrollIntoView({ behavior: 'smooth' });
   };
@@ -97,7 +96,7 @@ const LandingPage = () => {
               <CategoryCard
                 key={category.id}
                 category={category}
-                onClick={() => navigate(`/category/${category.id}`)} // Navigate to category page
+                onClick={() => navigate(`/category/${category.id}`)}
               />
             ))}
           </div>
