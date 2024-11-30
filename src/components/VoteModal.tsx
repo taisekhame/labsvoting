@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { X } from 'lucide-react';
-import axios from 'axios'; 
+// import axios from 'axios'; 
+import { useParams } from 'react-router-dom';
 
 interface VoteModalProps {
   nominee: {
@@ -16,6 +17,8 @@ interface VoteModalProps {
 
 const VoteModal = ({ nominee, onClose }: VoteModalProps) => {
   const [email, setEmail] = useState('');
+  const {id} = useParams()
+  const category_id = id
   const [votes, setVotes] = useState<string>('1');
   const [isEmailValid, setIsEmailValid] = useState(false);
 
@@ -31,51 +34,8 @@ const VoteModal = ({ nominee, onClose }: VoteModalProps) => {
 
   const voteCount = votes === '' ? 0 : parseInt(votes);
   const isValidVoteCount = voteCount >= 1;
-  const totalCost = isValidVoteCount ? voteCount * 50 : 0;
+  const totalCost = isValidVoteCount ? voteCount * 100 : 0;
   const isFormValid = isEmailValid && isValidVoteCount;
-
-  // Webhook function to send data to Firebase after successful payment
-  const sendWebhookToFirebase = async (transactionDetails: any) => {
-    try {
-      const response = await axios.post('YOUR_FIREBASE_WEBHOOK_ENDPOINT', {
-        transactionId: transactionDetails.tx_ref,
-        nomineeId: nominee.id,
-        nomineeName: nominee.name,
-        numberOfVotes: voteCount,
-        amountPaid: totalCost,
-        email: email
-      });
-      console.log('Webhook sent successfully', response.data);
-    } catch (error) {
-      console.error('Error sending webhook', error);
-    }
-  };
-
-  // Override form submission to handle custom redirect and webhook
-  const handleFormSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-
-    // Add an onsubmit event listener to the Flutterwave payment form
-    const form = e.target as HTMLFormElement;
-    form.onsubmit = (submitEvent) => {
-      submitEvent.preventDefault();
-      
-      // After payment, redirect to success page
-      const successRedirect = () => {
-        // Send webhook to Firebase
-        sendWebhookToFirebase({ tx_ref: TX_REF });
-        
-        // Redirect to success page
-        window.location.href = 'http://localhost:5174/success';
-      };
-
-      // Simulate payment completion (replace with actual Flutterwave payment completion logic)
-      successRedirect();
-    };
-
-    // Submit the form
-    form.submit();
-  };
 
   return (
     <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
@@ -99,7 +59,6 @@ const VoteModal = ({ nominee, onClose }: VoteModalProps) => {
         <form 
           method="POST"
           action="https://checkout.flutterwave.com/v3/hosted/pay"
-          onSubmit={handleFormSubmit}
           className="space-y-4"
         >
           {/* Hidden Flutterwave payment inputs */}
@@ -116,7 +75,12 @@ const VoteModal = ({ nominee, onClose }: VoteModalProps) => {
           <input
             type="hidden"
             name="customer[name]"
-            value={nominee.name}
+            value={`${nominee.name}, ${nominee.id.toString()}, ${category_id}, ${voteCount.toString()}`}
+          />
+          <input
+            type="hidden"
+            name="customer[phone]"
+            value={nominee.id.toString()}
           />
           <input
             type="hidden"
@@ -135,15 +99,9 @@ const VoteModal = ({ nominee, onClose }: VoteModalProps) => {
           />
           <input
             type="hidden"
-            name="meta[nominee_id]"
-            value={nominee.id.toString()}
-          />
-          <input
-            type="hidden"
             name="meta[votes_count]"
             value={voteCount.toString()}
           />
-          
           <div>
             <label htmlFor="email" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
               Email Address
@@ -188,7 +146,7 @@ const VoteModal = ({ nominee, onClose }: VoteModalProps) => {
               Total Cost: <span className="font-bold">₦{totalCost}</span>
             </p>
             <p className="text-xs text-blue-600 dark:text-blue-300 mt-1">
-              (₦50 per vote)
+              (₦100 per vote)
             </p>
           </div>
           
