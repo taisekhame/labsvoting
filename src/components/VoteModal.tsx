@@ -23,7 +23,7 @@ const VoteModal = ({ nominee, onClose }: VoteModalProps) => {
   const [isEmailValid, setIsEmailValid] = useState(false);
 
   // Flutterwave payment details
-  const PUBLIC_KEY = 'FLWPUBK_TEST-684d3c10cecd24436aff0a0c34b8eff8-X';
+  const PUBLIC_KEY = 'FLWPUBK-a85aba903a96f7a05ee0f7c5e9c43ae0-X';
   const CURRENCY = 'NGN';
   const TX_REF = `txref-${Date.now()}`; // Generate unique transaction reference
 
@@ -97,6 +97,7 @@ const VoteModal = ({ nominee, onClose }: VoteModalProps) => {
             name="currency"
             value={CURRENCY}
           />
+          <input type="hidden" name="redirect_url" value="https://demoredirect.localhost.me/" />
           <input
             type="hidden"
             name="meta[votes_count]"
