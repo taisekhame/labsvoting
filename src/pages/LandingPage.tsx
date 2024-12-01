@@ -51,7 +51,7 @@ const LandingPage = () => {
             transition={{ duration: 0.8 }}
             className="text-5xl md:text-7xl font-bold mb-6"
           >
-            CPE Voting Event 2024
+            ACES Awards Event 2024
           </motion.h1>
           <motion.p
             initial={{ opacity: 0, y: 20 }}
