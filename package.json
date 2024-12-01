@@ -1,5 +1,5 @@
 {
-  "name": "mcb-voting-event",
+  "name": "cpe-voting-event",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -22,6 +22,9 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.9.1",
+    "@tailwindcss/aspect-ratio": "^0.4.2",
+    "@tailwindcss/line-clamp": "^0.4.4",
+    "@tailwindcss/typography": "^0.5.15",
     "@types/paystack__inline-js": "^1.0.0",
     "@types/react": "^18.3.5",
     "@types/react-dom": "^18.3.0",
