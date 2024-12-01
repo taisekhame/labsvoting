@@ -18,7 +18,7 @@ const Navbar = () => {
           <Link to="/" className="flex items-center space-x-2" onClick={closeMenu}>
             <Award className="h-8 w-8 text-blue-600 dark:text-blue-400" />
             <span className="text-xl font-bold bg-gradient-to-r from-blue-600 to-blue-400 bg-clip-text text-transparent">
-              CPE AWARDS
+             ACES Awards
             </span>
           </Link>
 

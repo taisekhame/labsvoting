@@ -1,4 +1,4 @@
-import { Facebook, Twitter, Instagram, Mail } from 'lucide-react';
+import { Twitter, Instagram, Mail } from 'lucide-react';
 
 const Footer = () => {
   return (
@@ -6,7 +6,7 @@ const Footer = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <div>
-            <h3 className="text-lg font-semibold text-gray-900 mb-4">About CPE Awards</h3>
+            <h3 className="text-lg font-semibold text-gray-900 mb-4">About ACES Awards</h3>
             <p className="text-gray-600">
               Celebrating excellence and recognizing outstanding achievements in various categories.
               Join us in honoring the most catalytic behaviors that drive positive change.
@@ -34,7 +34,7 @@ const Footer = () => {
         </div>
         <div className="mt-8 pt-8 border-t border-gray-200">
           <p className="text-center text-gray-500">
-            © {new Date().getFullYear()} CPE Awards. All rights reserved.
+            © {new Date().getFullYear()} ACES Awards. All rights reserved.
           </p>
         </div>
       </div>
