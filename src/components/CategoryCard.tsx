@@ -49,4 +49,4 @@ const CategoryCard = ({ category }: CategoryProps) => {
   );
 };
 
-export default CategoryCard;
+export default CategoryCard
