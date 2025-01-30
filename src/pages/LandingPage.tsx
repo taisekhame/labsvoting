@@ -8,7 +8,7 @@ import CategoryCard from '../components/CategoryCard';
 
 const LandingPage = () => {
   const [categories, setCategories] = useState([]);
-  const navigate = useNavigate();
+  const navigate = useNavigate();z
 
   useEffect(() => {
     const fetchCategories = async () => {
