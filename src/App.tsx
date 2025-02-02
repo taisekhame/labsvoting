@@ -4,6 +4,7 @@ import Footer from './components/Footer';
 import LandingPage from './pages/LandingPage';
 import CategoryPage from './pages/CategoryPage';
 import SuccessPage from './pages/SuccessPage';
+import OnboardingPage from './pages/OnboardingPage';
 
 const App = () => {
   return (
@@ -12,6 +13,7 @@ const App = () => {
         <Navbar />
         <Routes>
           <Route path="" element={<LandingPage />} />
+          <Route path="/onboarding" element={<OnboardingPage />} />
           <Route path="/category/:id" element={<CategoryPage />} />
           <Route path="/success" element={<SuccessPage />} />
         </Routes>
